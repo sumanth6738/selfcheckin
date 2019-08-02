@@ -18,13 +18,8 @@ app.use('/wantToMeet', meetController)
 app.use('/admin', adminController)
 
 app.use('/assets/uploads', express.static(__dirname + '/assets/uploads'));
+app.use(express.static(path.join(__dirname, "client/build")))
 
-if(process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"))
-    app.get('*', (req,res) => {
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-    })
-}
 app.listen(port, () => {
     console.log('connected to port ', port)
 })
